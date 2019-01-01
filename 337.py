@@ -60,15 +60,20 @@ class Solution:
             return 0
         sub_left = self.dfs(node.left)
         sub_right = self.dfs(node.right)
+        left = node.left.val if node.left else 0
+        right = node.right.val if node.right else 0
+        node.val = max(sub_left+sub_right+node.val, left+right)
+        return left+right
         
     def rob(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        stack=[root]
-        while list:
-            c_node = stack.pop()
+        if root is None:
+            return 0
+        self.dfs(root)
+        return root.val if root.val else 0
 
 
 if __name__ == '__main__':
